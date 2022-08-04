@@ -32,6 +32,8 @@ public class PocetnaController {
         imageView.setFitHeight(245);
         imageView.setFitWidth (400);
         buttonSlika.setGraphic(imageView);
+        buttonSignIn.setStyle("-fx-background-color: #00ff00");
+        buttonSignUp.setStyle("-fx-background-color: #808080");
     }
 
 

@@ -7,20 +7,27 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class OdabirController {
-    public ImageView fldImageView;
     public Button btnBeginner;
     public Button btnAdvanced;
-    public Button btnTop;
+    public Button btnBackground;
 
 
     @FXML
     public void initialize() {
-        Image slika = new Image("/images/teretana.jpg");
-        fldImageView = new ImageView();
-        fldImageView.setPreserveRatio(true);
-        fldImageView.setImage(slika);
-        fldImageView.setFitWidth(600);
-        fldImageView.setFitHeight(400);
+        Image slika = new Image("/images/gym.jpg");
+        Image slika1 = new Image("images/upper-lower.png");
+        Image slika2 = new Image("images/full-body.png");
+
+        ImageView imageView = new ImageView(slika);
+        ImageView imageView1 = new ImageView(slika1);
+        imageView1.setFitWidth(250);
+        imageView1.setFitHeight(200);
+        ImageView imageView2 = new ImageView(slika2);
+        imageView2.setFitWidth(250);
+        imageView2.setFitHeight(200);
+        btnBackground.setGraphic(imageView);
+        btnBeginner.setGraphic(imageView1);
+        btnAdvanced.setGraphic(imageView2);
     }
 
     public void actionBeginner(ActionEvent event) {

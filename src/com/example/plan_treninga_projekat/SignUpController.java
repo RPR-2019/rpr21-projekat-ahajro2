@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import static javafx.scene.layout.Region.USE_COMPUTED_SIZE;
+import static javafx.scene.layout.Region.USE_PREF_SIZE;
 
 public class SignUpController {
     public TextField fldIme;
@@ -27,6 +28,7 @@ public class SignUpController {
     public TextField fldVisina;
     public PasswordField fldPassword;
     public Button imgKorisnik;
+    public TextArea fldArea;
     private KorisniciModel model;
 
     public SignUpController(KorisniciModel model) {
@@ -39,7 +41,32 @@ public class SignUpController {
         ImageView view = new ImageView();
         view.setFitHeight(128);
         view.setFitWidth(128);
+        fldArea.setText("""
+                TOP QUOTES FOR SUCCESS FROM GIANTS\s
+                1. ‘The last three or four reps is what makes the muscle grow. This area of pain divides a champion from someone who is not a champion.’
 
+                — Arnold Schwarzenegger, seven-time Mr. Olympia
+
+                2. ‘Success usually comes to those who are too busy to be looking for it.’
+
+                — Henry David Thoreau, poet and philosopher
+
+                3. ‘All progress takes place outside the comfort zone.’
+
+                — Michael John Bobak, digital artist
+
+                4. ‘If you think lifting is dangerous, try being weak. Being weak is dangerous.’
+
+                — Bret Contreras, sports scientist
+
+                5. ‘The only place where success comes before work is in the dictionary.’
+
+                — Vidal Sassoon, hairstylist and businessman
+
+                6. ‘The clock is ticking. Are you becoming the person you want to be?’
+
+                — Greg Plitt, fitness model
+                """);
 
 
 //        model.trenutniKorisnikProperty().addListener((obs, oldKorisnik, newKorisnik) -> {
