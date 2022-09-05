@@ -61,7 +61,7 @@ public class TreningController {
     @FXML
     public void initialize() {
 
-        if(korisnik.getOpcija() == Korisnik.OpcijeTreninga.MOJ_PLAN) {
+        if(korisnik.getOpcija() == Korisnik.OpcijeTreninga.MOJ_PLAN || korisnik.getOpcija() == Korisnik.OpcijeTreninga.POCETNIK ) {
             listaVjezbiPon.addAll(dao.dajVjezbeZaIdKorisnikaPon(korisnik.getId()));
             lvPon.setItems(listaVjezbiPon);
             System.out.println(listaVjezbiPon.size());
