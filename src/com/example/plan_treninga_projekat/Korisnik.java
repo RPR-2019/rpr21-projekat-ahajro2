@@ -4,14 +4,13 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Korisnik {
     private int id;
-    private String ime, prezime, email, username, password, visina, tezina;
+    private String ime, prezime, email, username, password, visina, tezina, url;
     public enum OpcijeTreninga {
         POCETNIK,
         NAPREDNI,
         MOJ_PLAN
     }
     OpcijeTreninga opcija;
-    private String url;
 
 
 
@@ -25,9 +24,10 @@ public class Korisnik {
         visina = k.visina;
         tezina = k.tezina;
         opcija = k.opcija;
+        url = k.url;
     }
 
-    public Korisnik(String ime, String prezime, String email, String username, String password, String visina, String tezina, String opcijeTreninga) {
+    public Korisnik(String ime, String prezime, String email, String username, String password, String visina, String tezina, String opcijeTreninga, String url) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
@@ -36,6 +36,7 @@ public class Korisnik {
         this.password = password;
         this.visina = visina;
         this.tezina = tezina;
+        this.url = url;
         if(opcijeTreninga.equals("POCETNIK")) {
             opcija = OpcijeTreninga.POCETNIK;
         } else if(opcijeTreninga.equals("NAPREDNI")) {
@@ -45,7 +46,7 @@ public class Korisnik {
         }
     }
 
-    public Korisnik(int id, String ime, String prezime, String email, String username, String password, String visina, String tezina, String opcijeTreninga) {
+    public Korisnik(int id, String ime, String prezime, String email, String username, String password, String visina, String tezina, String opcijeTreninga, String url) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
@@ -54,6 +55,7 @@ public class Korisnik {
         this.password = password;
         this.visina = visina;
         this.tezina = tezina;
+        this.url = url;
         if(opcijeTreninga.equals("POCETNIK")) {
             opcija = OpcijeTreninga.POCETNIK;
         } else if(opcijeTreninga.equals("NAPREDNI")) {

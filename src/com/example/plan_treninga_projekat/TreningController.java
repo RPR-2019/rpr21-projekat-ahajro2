@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -59,6 +61,45 @@ public class TreningController {
     @FXML
     public void initialize() {
 
+        if(korisnik.getOpcija() == Korisnik.OpcijeTreninga.MOJ_PLAN) {
+            listaVjezbiPon.addAll(dao.dajVjezbeZaIdKorisnikaPon(korisnik.getId()));
+            lvPon.setItems(listaVjezbiPon);
+            System.out.println(listaVjezbiPon.size());
+            listaVjezbiUto.addAll(dao.dajVjezbeZaIdKorisnikaUto(korisnik.getId()));
+            lvUto.setItems(listaVjezbiUto);
+            listaVjezbiSri.addAll(dao.dajVjezbeZaIdKorisnikaSri(korisnik.getId()));
+            lvSri.setItems(listaVjezbiSri);
+            listaVjezbiCet.addAll(dao.dajVjezbeZaIdKorisnikaCet(korisnik.getId()));
+            lvCet.setItems(listaVjezbiCet);
+            listaVjezbiPet.addAll(dao.dajVjezbeZaIdKorisnikaPet(korisnik.getId()));
+            lvPet.setItems(listaVjezbiPet);
+            listaVjezbiSub.addAll(dao.dajVjezbeZaIdKorisnikaSub(korisnik.getId()));
+            lvSub.setItems(listaVjezbiSub);
+            listaVjezbiNed.addAll(dao.dajVjezbeZaIdKorisnikaNed(korisnik.getId()));
+            lvNed.setItems(listaVjezbiNed);
+        }
+        else if(korisnik.getOpcija() == Korisnik.OpcijeTreninga.NAPREDNI) {
+            listaVjezbiPon.addAll(dao.dajVjezbeKorisnikaPonNapredni());
+            lvPon.setItems(listaVjezbiPon);
+            System.out.println(listaVjezbiPon.size());
+            listaVjezbiUto.addAll(dao.dajVjezbeKorisnikaUtoNapredni());
+            lvUto.setItems(listaVjezbiUto);
+            listaVjezbiSri.addAll(dao.dajVjezbeKorisnikaSriNapredni());
+            lvSri.setItems(listaVjezbiSri);
+            listaVjezbiCet.addAll(dao.dajVjezbeKorisnikaCetNapredni());
+            lvCet.setItems(listaVjezbiCet);
+            listaVjezbiPet.addAll(dao.dajVjezbeKorisnikaPetNapredni());
+            lvPet.setItems(listaVjezbiPet);
+            listaVjezbiSub.addAll(dao.dajVjezbeKorisnikaSubNapredni());
+            lvSub.setItems(listaVjezbiSub);
+            listaVjezbiNed.addAll(dao.dajVjezbeKorisnikaNedNapredni());
+            lvNed.setItems(listaVjezbiNed);
+        }
+        ImageView view = new ImageView();
+        view.setFitWidth(128);
+        view.setFitHeight(128);
+        view.setImage(new Image(korisnik.getUrl()));
+        btnSlika.setGraphic(view);
 
     }
 
@@ -74,12 +115,20 @@ public class TreningController {
         Parent root = loader.load();
         stage.setTitle("Informacije o suplementaciji");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
     }
 
-    public void onActionExplonation() {
-
+    public void onActionExplonation() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/pojmovi.fxml"));
+        HelpController helpController = new HelpController();
+        loader.setController(helpController);
+        Parent root = loader.load();
+        stage.setTitle("Objašnjenje korištenja aplikacije");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
     }
 
     public void onActionCalculateCal() throws IOException {
@@ -90,7 +139,7 @@ public class TreningController {
         Parent root = loader.load();
         stage.setTitle("Kalkulator za računanje kalorija");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -102,7 +151,7 @@ public class TreningController {
         Parent root = loader.load();
         stage.setTitle("Kalkulator za računanje BodyFat-a");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -114,7 +163,7 @@ public class TreningController {
         Parent root = loader.load();
         stage.setTitle("Prozor za dodavanje vježbi");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
         stage.setOnHiding(event -> {
             if(!exerciseController.getFldVjezba().trim().equals("")) {
@@ -133,7 +182,7 @@ public class TreningController {
         Parent root = loader.load();
         stage.setTitle("Prozor za dodavanje vježbi");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
         stage.setOnHiding(event -> {
             if(!exerciseController.getFldVjezba().trim().equals("")) {
@@ -152,7 +201,7 @@ public class TreningController {
         Parent root = loader.load();
         stage.setTitle("Prozor za dodavanje vježbi");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
         stage.setOnHiding(event -> {
             if(!exerciseController.getFldVjezba().trim().equals("")) {
@@ -171,7 +220,7 @@ public class TreningController {
         Parent root = loader.load();
         stage.setTitle("Prozor za dodavanje vježbi");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
         stage.setOnHiding(event -> {
             if(!exerciseController.getFldVjezba().trim().equals("")) {
@@ -190,7 +239,7 @@ public class TreningController {
         Parent root = loader.load();
         stage.setTitle("Prozor za dodavanje vježbi");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
         stage.setOnHiding(event -> {
             if(!exerciseController.getFldVjezba().trim().equals("")) {
@@ -209,7 +258,7 @@ public class TreningController {
         Parent root = loader.load();
         stage.setTitle("Prozor za dodavanje vježbi");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
         stage.setOnHiding(event -> {
             if(!exerciseController.getFldVjezba().trim().equals("")) {
@@ -228,7 +277,7 @@ public class TreningController {
         Parent root = loader.load();
         stage.setTitle("Prozor za dodavanje vježbi");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
-        stage.setResizable(true);
+        stage.setResizable(false);
         stage.show();
         stage.setOnHiding(event -> {
             if(!exerciseController.getFldVjezba().trim().equals("")) {
@@ -238,6 +287,23 @@ public class TreningController {
                 lvNed.setItems(listaVjezbiNed);
             }
         });
+    }
+
+    public void onActionAboutMenu() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/pojmovi.fxml"));
+        HelpController helpController = new HelpController();
+        loader.setController(helpController);
+        Parent root = loader.load();
+        stage.setTitle("Objašnjenje korištenja aplikacije");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
+        stage.show();
+    }
+
+    public void onActionCloseMenu() {
+        Stage s = (Stage) btnSlika.getScene().getWindow();
+        s.close();
     }
 
 

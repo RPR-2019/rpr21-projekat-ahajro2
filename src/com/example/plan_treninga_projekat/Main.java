@@ -19,6 +19,7 @@ public class Main extends Application {
         Parent root = loader.load();
         stage.setTitle("Dobrodošli u APLIKACIJU ZA PLAN TRENINGA");
         stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(false);
         stage.show();
     }
 

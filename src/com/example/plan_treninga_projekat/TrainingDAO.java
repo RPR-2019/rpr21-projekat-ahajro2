@@ -1,5 +1,6 @@
 package com.example.plan_treninga_projekat;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.io.FileInputStream;
@@ -16,7 +17,9 @@ public class TrainingDAO {
 
     private PreparedStatement brojRedova, dodajRedove, dodajKorisnika, prviUpit, dodajVjezbuPon, dodajRedPon,
             dodajVjezbuUto, dodajVjezbuSri, dodajVjezbuCet, dodajVjezbuPet, dodajVjezbuSub, dodajVjezbuNed, dajIdKorisnikaUpit, dajKorisnikaUpit,
-            dajVjezbePon, dajVjezbeUto, dajVjezbeSri, dajVjezbeCet, dajVjezbePet, dajVjezbeSub, dajVjezbeNed;
+            dajVjezbePon, dajVjezbeUto, dajVjezbeSri, dajVjezbeCet, dajVjezbePet, dajVjezbeSub, dajVjezbeNed,
+            dajVjezbePonNapredni, dajVjezbeUtoNapredni, dajVjezbeSriNapredni, dajVjezbeCetNapredni, dajVjezbePetNapredni,
+            dajVjezbeSubNapredni, dajVjezbeNedNapredni;
 
     private TrainingDAO() {
         try {
@@ -36,7 +39,7 @@ public class TrainingDAO {
             }
         }
         try {
-            dodajKorisnika = conn.prepareStatement("INSERT INTO korisnik VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            dodajKorisnika = conn.prepareStatement("INSERT INTO korisnik VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             dodajVjezbuPon = conn.prepareStatement("INSERT INTO ponedjeljak VALUES(?, ?)");
             dodajVjezbuUto = conn.prepareStatement("INSERT INTO utorak VALUES(?, ?)");
             dodajVjezbuSri = conn.prepareStatement("INSERT INTO srijeda VALUES(?, ?)");
@@ -53,6 +56,13 @@ public class TrainingDAO {
             dajVjezbeSub = conn.prepareStatement("SELECT sub FROM subota WHERE id = ?");
             dajVjezbeNed = conn.prepareStatement("SELECT ned FROM nedjelja WHERE id = ?");
 
+            dajVjezbePonNapredni = conn.prepareStatement("SELECT ponedjeljak FROM napredni_trening");
+            dajVjezbeUtoNapredni = conn.prepareStatement("SELECT utorak FROM napredni_trening");
+            dajVjezbeSriNapredni = conn.prepareStatement("SELECT srijeda FROM napredni_trening");
+            dajVjezbeCetNapredni = conn.prepareStatement("SELECT cetvrtak FROM napredni_trening");
+            dajVjezbePetNapredni = conn.prepareStatement("SELECT petak FROM napredni_trening");
+            dajVjezbeSubNapredni = conn.prepareStatement("SELECT subota FROM napredni_trening");
+            dajVjezbeNedNapredni = conn.prepareStatement("SELECT nedjelja FROM napredni_trening");
 
             brojRedova = conn.prepareStatement("SELECT MAX(id)+1 FROM korisnik");
             dajIdKorisnikaUpit = conn.prepareStatement("SELECT id FROM korisnik WHERE username = ?");
@@ -117,6 +127,7 @@ public class TrainingDAO {
             dodajKorisnika.setString(7, k.getVisina());
             dodajKorisnika.setString(8, k.getTezina());
             dodajKorisnika.setString(9, k.getOpcija().toString());
+            dodajKorisnika.setString(10, k.getUrl());
             dodajKorisnika.executeUpdate();
 
         } catch (SQLException e) {
@@ -196,7 +207,262 @@ public class TrainingDAO {
     }
 
     public ObservableList<String> dajVjezbeZaIdKorisnikaPon(int id) {
+        try {
+            dajVjezbePon.setInt(1, id);
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbePon.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
+    public ObservableList<String> dajVjezbeKorisnikaPonNapredni() {
+        try {
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbePonNapredni.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeZaIdKorisnikaUto(int id) {
+        try {
+            dajVjezbeUto.setInt(1, id);
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbeUto.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeKorisnikaUtoNapredni() {
+        try {
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbeUtoNapredni.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeZaIdKorisnikaSri(int id) {
+        try {
+            dajVjezbeSri.setInt(1, id);
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbeSri.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeKorisnikaSriNapredni() {
+        try {
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbeSriNapredni.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeZaIdKorisnikaCet(int id) {
+        try {
+            dajVjezbeCet.setInt(1, id);
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbeCet.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeKorisnikaCetNapredni() {
+        try {
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbeCetNapredni.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeZaIdKorisnikaPet(int id) {
+        try {
+            dajVjezbePet.setInt(1, id);
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbePet.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeKorisnikaPetNapredni() {
+        try {
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbePetNapredni.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeZaIdKorisnikaSub(int id) {
+        try {
+            dajVjezbeSub.setInt(1, id);
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbeSub.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeKorisnikaSubNapredni() {
+        try {
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbeSubNapredni.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeZaIdKorisnikaNed(int id) {
+        try {
+            dajVjezbeNed.setInt(1, id);
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbeNed.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ObservableList<String> dajVjezbeKorisnikaNedNapredni() {
+        try {
+            ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+            ResultSet rs = dajVjezbeNedNapredni.executeQuery();
+            if (rs.next()) {
+                listaVjezbi.add(rs.getString(1));
+                while(rs.next()) {
+                    listaVjezbi.add(rs.getString(1));
+                }
+                return listaVjezbi;
+            }
+            return FXCollections.observableArrayList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -223,7 +489,7 @@ public class TrainingDAO {
                 System.out.println(rs.getString(6));
                 Korisnik k = new Korisnik(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
                        rs.getString(5), rs.getString(6), rs.getString(7),
-                       rs.getString(8), rs.getString(9));
+                       rs.getString(8), rs.getString(9), rs.getString(10));
 
                return k;
             }

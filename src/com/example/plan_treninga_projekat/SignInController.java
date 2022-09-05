@@ -37,6 +37,9 @@ public class SignInController {
             stage.setTitle("Dobrodošli u svoj plan treninga");
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             stage.show();
+            stage.setResizable(false);
+            Stage s = (Stage) fldUsername.getScene().getWindow();
+            s.close();
         }
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);

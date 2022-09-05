@@ -195,9 +195,20 @@ public class SignUpController {
             alert.setContentText("Lozinka mora imati najmanje 6 znakova!");
             alert.showAndWait();
         } //dodati samo validaciju za polje za ime prezime itd...
+        else if(fldUsername.getText().isEmpty() || fldIme.getText().isEmpty() || fldPrezime.getText().isEmpty() || fldEmail.getText().isEmpty() || fldTezina.getText().isEmpty() || fldVisina.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Greška pri registraciji");
+            alert.setHeaderText("POLJA NE SMIJU BITI PRAZNA!");
+            alert.setContentText("Imate prazno polje, popunite polja za registraciju!");
+            alert.showAndWait();
+        } //dodati samo validaciju za polje za ime prezime itd...
         else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/trening_pocetna.fxml"));
-            Korisnik k = new Korisnik(fldIme.getText(), fldPrezime.getText(), fldEmail.getText(), fldUsername.getText(), fldPassword.getText(), fldVisina.getText(), fldTezina.getText(), choiceTrening.getSelectionModel().getSelectedItem().toString());
+            ImageView view = (ImageView)imgKorisnik.getGraphic();
+            Image image = view.getImage();
+
+            Korisnik k = new Korisnik(fldIme.getText(), fldPrezime.getText(), fldEmail.getText(), fldUsername.getText(), fldPassword.getText(), fldVisina.getText(), fldTezina.getText(), choiceTrening.getSelectionModel().getSelectedItem().toString(), image.getUrl());
+            System.out.println(k.getUrl());
             trainingDAO.dodajKorisnika(k);
             int idKorisnika = trainingDAO.dajIdKorisnika(fldUsername.getText());
             if(idKorisnika != 0) {
@@ -209,7 +220,10 @@ public class SignUpController {
             Stage stage = new Stage();
             stage.setTitle("Dobrodošli u svoj plan treninga");
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+            stage.setResizable(false);
             stage.show();
+            Stage s = (Stage) fldUsername.getScene().getWindow();
+            s.close();
         }
     }
 
