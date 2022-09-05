@@ -41,7 +41,14 @@ public class TreningController {
 
     private Korisnik korisnik;
     private TrainingDAO dao = TrainingDAO.getInstance();
-    private ObservableList<String> listaVjezbi = FXCollections.observableArrayList();
+    private ObservableList<String> listaVjezbiPon = FXCollections.observableArrayList();
+    private ObservableList<String> listaVjezbiUto = FXCollections.observableArrayList();
+    private ObservableList<String> listaVjezbiSri = FXCollections.observableArrayList();
+    private ObservableList<String> listaVjezbiCet = FXCollections.observableArrayList();
+    private ObservableList<String> listaVjezbiPet = FXCollections.observableArrayList();
+    private ObservableList<String> listaVjezbiSub = FXCollections.observableArrayList();
+    private ObservableList<String> listaVjezbiNed = FXCollections.observableArrayList();
+
 
 
 
@@ -113,28 +120,124 @@ public class TreningController {
             if(!exerciseController.getFldVjezba().trim().equals("")) {
                 System.out.println(exerciseController.getFldVjezba());
                 dao.setDodajVjezbuPon(korisnik.getId(), exerciseController.getFldVjezba());
-                listaVjezbi.add(exerciseController.getFldVjezba());
-                lvPon.setItems(listaVjezbi);
+                listaVjezbiPon.add(exerciseController.getFldVjezba());
+                lvPon.setItems(listaVjezbiPon);
             }
         });
     }
-    public void onActionUtorak() {
-
+    public void onActionUtorak() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dodavanje_vjezbi.fxml"));
+        ExerciseController exerciseController = new ExerciseController();
+        loader.setController(exerciseController);
+        Parent root = loader.load();
+        stage.setTitle("Prozor za dodavanje vježbi");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(true);
+        stage.show();
+        stage.setOnHiding(event -> {
+            if(!exerciseController.getFldVjezba().trim().equals("")) {
+                System.out.println(exerciseController.getFldVjezba());
+                dao.setDodajVjezbuUto(korisnik.getId(), exerciseController.getFldVjezba());
+                listaVjezbiUto.add(exerciseController.getFldVjezba());
+                lvUto.setItems(listaVjezbiUto);
+            }
+        });
     }
-    public void onActionSrijeda() {
-
+    public void onActionSrijeda() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dodavanje_vjezbi.fxml"));
+        ExerciseController exerciseController = new ExerciseController();
+        loader.setController(exerciseController);
+        Parent root = loader.load();
+        stage.setTitle("Prozor za dodavanje vježbi");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(true);
+        stage.show();
+        stage.setOnHiding(event -> {
+            if(!exerciseController.getFldVjezba().trim().equals("")) {
+                System.out.println(exerciseController.getFldVjezba());
+                dao.setDodajVjezbuSri(korisnik.getId(), exerciseController.getFldVjezba());
+                listaVjezbiSri.add(exerciseController.getFldVjezba());
+                lvSri.setItems(listaVjezbiSri);
+            }
+        });
     }
-    public void onActionCetvrtak() {
-
+    public void onActionCetvrtak() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dodavanje_vjezbi.fxml"));
+        ExerciseController exerciseController = new ExerciseController();
+        loader.setController(exerciseController);
+        Parent root = loader.load();
+        stage.setTitle("Prozor za dodavanje vježbi");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(true);
+        stage.show();
+        stage.setOnHiding(event -> {
+            if(!exerciseController.getFldVjezba().trim().equals("")) {
+                System.out.println(exerciseController.getFldVjezba());
+                dao.setDodajVjezbuCet(korisnik.getId(), exerciseController.getFldVjezba());
+                listaVjezbiCet.add(exerciseController.getFldVjezba());
+                lvCet.setItems(listaVjezbiCet);
+            }
+        });
     }
-    public void onActionPetak() {
-
+    public void onActionPetak() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dodavanje_vjezbi.fxml"));
+        ExerciseController exerciseController = new ExerciseController();
+        loader.setController(exerciseController);
+        Parent root = loader.load();
+        stage.setTitle("Prozor za dodavanje vježbi");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(true);
+        stage.show();
+        stage.setOnHiding(event -> {
+            if(!exerciseController.getFldVjezba().trim().equals("")) {
+                System.out.println(exerciseController.getFldVjezba());
+                dao.setDodajVjezbuPet(korisnik.getId(), exerciseController.getFldVjezba());
+                listaVjezbiPet.add(exerciseController.getFldVjezba());
+                lvPet.setItems(listaVjezbiPet);
+            }
+        });
     }
-    public void onActionSubota() {
-
+    public void onActionSubota() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dodavanje_vjezbi.fxml"));
+        ExerciseController exerciseController = new ExerciseController();
+        loader.setController(exerciseController);
+        Parent root = loader.load();
+        stage.setTitle("Prozor za dodavanje vježbi");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(true);
+        stage.show();
+        stage.setOnHiding(event -> {
+            if(!exerciseController.getFldVjezba().trim().equals("")) {
+                System.out.println(exerciseController.getFldVjezba());
+                dao.setDodajVjezbuSub(korisnik.getId(), exerciseController.getFldVjezba());
+                listaVjezbiSub.add(exerciseController.getFldVjezba());
+                lvSub.setItems(listaVjezbiSub);
+            }
+        });
     }
-    public void onActionNedjelja() {
-
+    public void onActionNedjelja() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/dodavanje_vjezbi.fxml"));
+        ExerciseController exerciseController = new ExerciseController();
+        loader.setController(exerciseController);
+        Parent root = loader.load();
+        stage.setTitle("Prozor za dodavanje vježbi");
+        stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
+        stage.setResizable(true);
+        stage.show();
+        stage.setOnHiding(event -> {
+            if(!exerciseController.getFldVjezba().trim().equals("")) {
+                System.out.println(exerciseController.getFldVjezba());
+                dao.setDodajVjezbuNed(korisnik.getId(), exerciseController.getFldVjezba());
+                listaVjezbiNed.add(exerciseController.getFldVjezba());
+                lvNed.setItems(listaVjezbiNed);
+            }
+        });
     }
 
 

@@ -1,5 +1,7 @@
 package com.example.plan_treninga_projekat;
 
+import javafx.collections.ObservableList;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
@@ -13,7 +15,8 @@ public class TrainingDAO {
     private Connection conn;
 
     private PreparedStatement brojRedova, dodajRedove, dodajKorisnika, prviUpit, dodajVjezbuPon, dodajRedPon,
-            dodajVjezbuUto, dodajVjezbuSri, dodajVjezbuCet, dodajVjezbuPet, dodajVjezbuSub, dodajVjezbuNed, dajIdKorisnikaUpit;
+            dodajVjezbuUto, dodajVjezbuSri, dodajVjezbuCet, dodajVjezbuPet, dodajVjezbuSub, dodajVjezbuNed, dajIdKorisnikaUpit, dajKorisnikaUpit,
+            dajVjezbePon, dajVjezbeUto, dajVjezbeSri, dajVjezbeCet, dajVjezbePet, dajVjezbeSub, dajVjezbeNed;
 
     private TrainingDAO() {
         try {
@@ -35,8 +38,26 @@ public class TrainingDAO {
         try {
             dodajKorisnika = conn.prepareStatement("INSERT INTO korisnik VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             dodajVjezbuPon = conn.prepareStatement("INSERT INTO ponedjeljak VALUES(?, ?)");
+            dodajVjezbuUto = conn.prepareStatement("INSERT INTO utorak VALUES(?, ?)");
+            dodajVjezbuSri = conn.prepareStatement("INSERT INTO srijeda VALUES(?, ?)");
+            dodajVjezbuCet = conn.prepareStatement("INSERT INTO cetvrtak VALUES(?, ?)");
+            dodajVjezbuPet = conn.prepareStatement("INSERT INTO petak VALUES(?, ?)");
+            dodajVjezbuSub = conn.prepareStatement("INSERT INTO subota VALUES(?, ?)");
+            dodajVjezbuNed = conn.prepareStatement("INSERT INTO nedjelja VALUES(?, ?)");
+
+            dajVjezbePon = conn.prepareStatement("SELECT pon FROM ponedjeljak WHERE id = ?");
+            dajVjezbeUto = conn.prepareStatement("SELECT uto FROM utorak WHERE id = ?");
+            dajVjezbeSri = conn.prepareStatement("SELECT sri FROM srijeda WHERE id = ?");
+            dajVjezbeCet = conn.prepareStatement("SELECT cet FROM cetvrtak WHERE id = ?");
+            dajVjezbePet = conn.prepareStatement("SELECT pet FROM petak WHERE id = ?");
+            dajVjezbeSub = conn.prepareStatement("SELECT sub FROM subota WHERE id = ?");
+            dajVjezbeNed = conn.prepareStatement("SELECT ned FROM nedjelja WHERE id = ?");
+
+
             brojRedova = conn.prepareStatement("SELECT MAX(id)+1 FROM korisnik");
             dajIdKorisnikaUpit = conn.prepareStatement("SELECT id FROM korisnik WHERE username = ?");
+
+            dajKorisnikaUpit = conn.prepareStatement("SELECT * FROM korisnik WHERE username=?");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,8 +133,72 @@ public class TrainingDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setDodajVjezbuUto(int id, String vjezba) {
+        try {
+            dodajVjezbuUto.setInt(1, id);
+            dodajVjezbuUto.setString(2, vjezba);
+            dodajVjezbuUto.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDodajVjezbuSri(int id, String vjezba) {
+        try {
+            dodajVjezbuSri.setInt(1, id);
+            dodajVjezbuSri.setString(2, vjezba);
+            dodajVjezbuSri.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDodajVjezbuCet(int id, String vjezba) {
+        try {
+            dodajVjezbuCet.setInt(1, id);
+            dodajVjezbuCet.setString(2, vjezba);
+            dodajVjezbuCet.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDodajVjezbuPet(int id, String vjezba) {
+        try {
+            dodajVjezbuPet.setInt(1, id);
+            dodajVjezbuPet.setString(2, vjezba);
+            dodajVjezbuPet.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDodajVjezbuSub(int id, String vjezba) {
+        try {
+            dodajVjezbuSub.setInt(1, id);
+            dodajVjezbuSub.setString(2, vjezba);
+            dodajVjezbuSub.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setDodajVjezbuNed(int id, String vjezba) {
+        try {
+            dodajVjezbuNed.setInt(1, id);
+            dodajVjezbuNed.setString(2, vjezba);
+            dodajVjezbuNed.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ObservableList<String> dajVjezbeZaIdKorisnikaPon(int id) {
 
     }
+
 
     public int dajIdKorisnika(String username) {
         try {
@@ -128,6 +213,25 @@ public class TrainingDAO {
             e.printStackTrace();
         }
         return 0;
+    }
+
+    public Korisnik dajKorisnika(String username) {
+        try {
+            dajKorisnikaUpit.setString(1, username);
+            ResultSet rs = dajKorisnikaUpit.executeQuery();
+            if(rs.next()) {
+                System.out.println(rs.getString(6));
+                Korisnik k = new Korisnik(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                       rs.getString(5), rs.getString(6), rs.getString(7),
+                       rs.getString(8), rs.getString(9));
+
+               return k;
+            }
+            else return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public void dodajVjezbu(Korisnik k, String dan, String vjezba) {

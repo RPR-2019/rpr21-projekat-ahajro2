@@ -13,9 +13,7 @@ public class Korisnik {
     OpcijeTreninga opcija;
     private String url;
 
-    public Korisnik() {
 
-    }
 
     public Korisnik(Korisnik k) {
         id = k.id;
@@ -30,6 +28,24 @@ public class Korisnik {
     }
 
     public Korisnik(String ime, String prezime, String email, String username, String password, String visina, String tezina, String opcijeTreninga) {
+        this.id = id;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.visina = visina;
+        this.tezina = tezina;
+        if(opcijeTreninga.equals("POCETNIK")) {
+            opcija = OpcijeTreninga.POCETNIK;
+        } else if(opcijeTreninga.equals("NAPREDNI")) {
+            opcija = OpcijeTreninga.NAPREDNI;
+        } else if(opcijeTreninga.equals("MOJ_PLAN")) {
+            opcija = OpcijeTreninga.MOJ_PLAN;
+        }
+    }
+
+    public Korisnik(int id, String ime, String prezime, String email, String username, String password, String visina, String tezina, String opcijeTreninga) {
         this.id = id;
         this.ime = ime;
         this.prezime = prezime;
