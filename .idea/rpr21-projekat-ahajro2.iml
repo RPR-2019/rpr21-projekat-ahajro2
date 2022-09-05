@@ -12,5 +12,9 @@
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="at.mukprojects.giphy4j" level="project" />
     <orderEntry type="library" name="javafx" level="project" />
+    <orderEntry type="library" name="javafx" level="project" />
+    <orderEntry type="library" name="javafx" level="project" />
+    <orderEntry type="library" name="javafx" level="project" />
+    <orderEntry type="library" name="xerial.sqlite.jdbc" level="project" />
   </component>
 </module>

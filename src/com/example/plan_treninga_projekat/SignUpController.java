@@ -2,6 +2,8 @@ package com.example.plan_treninga_projekat;
 
 
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,15 +31,22 @@ public class SignUpController {
     public PasswordField fldPassword;
     public Button imgKorisnik;
     public TextArea fldArea;
+    public ChoiceBox choiceTrening;
+    public TrainingDAO trainingDAO = TrainingDAO.getInstance();
     private KorisniciModel model;
-
+    private ObservableList<String> lista = FXCollections.observableArrayList();
     public SignUpController(KorisniciModel model) {
+        lista.addAll("POCETNIK", "NAPREDNI", "MOJ_PLAN");
         this.model = model;
     }
 
     @FXML
     public void initialize() {
 //        listKorisnici.setItems(model.getKorisnici());
+
+        choiceTrening.setItems(lista);
+        choiceTrening.getSelectionModel().selectFirst();
+        System.out.println(choiceTrening.getSelectionModel().getSelectedItem().toString());
         ImageView view = new ImageView();
         view.setFitHeight(128);
         view.setFitWidth(128);
@@ -185,14 +194,20 @@ public class SignUpController {
             alert.setHeaderText("Neispravna lozinka");
             alert.setContentText("Lozinka mora imati najmanje 6 znakova!");
             alert.showAndWait();
-        }
+        } //dodati samo validaciju za polje za ime prezime itd...
         else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/prva_pocetna.fxml"));
-            OdabirController odabirController = new OdabirController();
-            loader.setController(odabirController);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/trening_pocetna.fxml"));
+            Korisnik k = new Korisnik(fldIme.getText(), fldPrezime.getText(), fldEmail.getText(), fldUsername.getText(), fldPassword.getText(), fldVisina.getText(), fldTezina.getText(), choiceTrening.getSelectionModel().getSelectedItem().toString());
+            trainingDAO.dodajKorisnika(k);
+            int idKorisnika = trainingDAO.dajIdKorisnika(fldUsername.getText());
+            if(idKorisnika != 0) {
+                k.setId(idKorisnika);
+            }
+            TreningController treningController = new TreningController(k);
+            loader.setController(treningController);
             Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setTitle("Dobrodošli u trening IZBORNIK");
+            stage.setTitle("Dobrodošli u svoj plan treninga");
             stage.setScene(new Scene(root, USE_COMPUTED_SIZE, USE_COMPUTED_SIZE));
             stage.show();
         }
@@ -229,16 +244,16 @@ public class SignUpController {
         stage.show();
 //        imgKorisnik.setPrefWidth(128);
 //        imgKorisnik.setPrefHeight(128);
-//        noviProzor.btnOk.getScene().getWindow().setOnHiding(e -> {
+        noviProzor.btnOk.getScene().getWindow().setOnHiding(e -> {
 //            model.postaviSliku(model.getTrenutniKorisnik(), PretragaController.getUrlSlike());
 //            model.getTrenutniKorisnik().setUrl(PretragaController.getUrlSlike());
-//            if(PretragaController.getUrlSlike()!=null && PretragaController.getUrlSlike()!="") {
-//                ImageView view = new ImageView();
-//                view.setFitWidth(128);
-//                view.setFitHeight(128);
-//                view.setImage(new Image(PretragaController.getUrlSlike()));
-//                imgKorisnik.setGraphic(view);}
-//        });
+            if(PretragaController.getUrlSlike()!=null && PretragaController.getUrlSlike()!="") {
+                ImageView view = new ImageView();
+                view.setFitWidth(128);
+                view.setFitHeight(128);
+                view.setImage(new Image(PretragaController.getUrlSlike()));
+                imgKorisnik.setGraphic(view);}
+        });
 
     }
     public void exitAction(ActionEvent actionEvent) {
