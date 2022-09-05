@@ -205,6 +205,14 @@ public class SignUpController {
         else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/trening_pocetna.fxml"));
             ImageView view = (ImageView)imgKorisnik.getGraphic();
+            if(view == null) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Greška pri registraciji");
+                alert.setHeaderText("Niste odabrali sliku sa GIPHY-a");
+                alert.setContentText("Morate odabrati sliku sa giphy-a klikom na dugme na sredini.");
+                alert.showAndWait();
+                return;
+            }
             Image image = view.getImage();
 
             Korisnik k = new Korisnik(fldIme.getText(), fldPrezime.getText(), fldEmail.getText(), fldUsername.getText(), fldPassword.getText(), fldVisina.getText(), fldTezina.getText(), choiceTrening.getSelectionModel().getSelectedItem().toString(), image.getUrl());
