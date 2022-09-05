@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="237.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="144.6666259765625" minWidth="10.0" prefWidth="95.33332061767578" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="207.66667938232422" minWidth="10.0" prefWidth="203.66667938232422" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" />
+      <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <Label text="Godine:" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label text="Visina:" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Tezina:" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+         </GridPane.margin>
+      </TextField>
+      <TextField GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+         </GridPane.margin>
+      </TextField>
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+         <children>
+            <TextField prefHeight="25.0" prefWidth="197.0">
+               <HBox.margin>
+                  <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+               </HBox.margin>
+            </TextField>
+         </children>
+      </HBox>
+      <Label text="Vaše kalorije za održanje mase: " GridPane.columnSpan="2">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField prefHeight="25.0" prefWidth="269.0" GridPane.columnIndex="1">
+         <GridPane.margin>
+            <Insets bottom="3.0" left="80.0" right="5.0" top="3.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label text="Obim vrata: " GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Label>
+      <Label text="Obim struka: " GridPane.rowIndex="5">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Label>
+      <TextField GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+         </GridPane.margin>
+      </TextField>
+      <Label text="Rezultat: " GridPane.rowIndex="6">
+         <GridPane.margin>
+            <Insets left="5.0" />
+         </GridPane.margin>
+      </Label>
+      <HBox GridPane.columnIndex="1" GridPane.rowIndex="6">
+         <children>
+            <TextField prefHeight="25.0" prefWidth="34.0">
+               <HBox.margin>
+                  <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+               </HBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Izračunaj ">
+               <HBox.margin>
+                  <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</GridPane>

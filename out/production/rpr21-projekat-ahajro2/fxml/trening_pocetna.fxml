@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <children>
+            <MenuBar prefHeight="27.0" prefWidth="800.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About App" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox prefHeight="0.0" prefWidth="800.0">
+               <children>
+                  <Button fx:id="btnPon" mnemonicParsing="false" onAction="#onActionPonedjeljak" prefHeight="25.0" prefWidth="135.0" text="PONEDJELJAK">
+                     <HBox.margin>
+                        <Insets bottom="3.0" left="155.0" right="3.0" top="3.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnUto" mnemonicParsing="false" onAction="#onActionUtorak" prefHeight="25.0" prefWidth="131.0" text="UTORAK">
+                     <HBox.margin>
+                        <Insets bottom="3.0" right="3.0" top="3.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnSri" mnemonicParsing="false" onAction="#onActionSrijeda" prefHeight="25.0" prefWidth="131.0" text="SRIJEDA">
+                     <HBox.margin>
+                        <Insets bottom="3.0" right="3.0" top="3.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnCet" mnemonicParsing="false" onAction="#onActionCetvrtak" prefHeight="25.0" prefWidth="129.0" text="CETVRTAK">
+                     <HBox.margin>
+                        <Insets right="3.0" top="3.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnPet" mnemonicParsing="false" onAction="#onActionPetak" prefHeight="25.0" prefWidth="129.0" text="PETAK">
+                     <HBox.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnSub" mnemonicParsing="false" onAction="#onActionSubota" prefHeight="25.0" prefWidth="129.0" text="SUBOTA">
+                     <HBox.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="btnNed" mnemonicParsing="false" onAction="#onActionNedjelja" prefHeight="25.0" prefWidth="129.0" text="NEDJELJA">
+                     <HBox.margin>
+                        <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
+   <left>
+      <VBox prefHeight="473.0" prefWidth="149.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnSlika" mnemonicParsing="false" onAction="#onActionSlikaT" prefHeight="128.0" prefWidth="128.0">
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button mnemonicParsing="false" prefWidth="128.0" text="Promijeni sliku">
+               <VBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="buttonCal" mnemonicParsing="false" onAction="#onActionCalculateCal" prefWidth="128.0" text="Izračunaj kalorije">
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="buttonFat" mnemonicParsing="false" onAction="#onActionCalculateFat" prefWidth="128.0" text="Izračunaj body fat">
+               <VBox.margin>
+                  <Insets left="10.0" top="5.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <ListView fx:id="lvPon" />
+            <ListView fx:id="lvUto" />
+            <ListView fx:id="lvSri" />
+            <ListView fx:id="lvCet" />
+            <ListView fx:id="lvPet" />
+            <ListView fx:id="lvSub" />
+            <ListView fx:id="lvNed" />
+         </children>
+      </HBox>
+   </center>
+   <bottom>
+      <HBox prefWidth="800.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="buttonSup" mnemonicParsing="false" onAction="#onActionSuplementation" prefWidth="128.0" text="Suplementacija">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="buttonExpl" mnemonicParsing="false" onAction="#onActionExplonation" prefWidth="128.0" text="Objašnjenja pojmova">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
